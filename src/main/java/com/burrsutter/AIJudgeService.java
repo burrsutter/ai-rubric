@@ -5,14 +5,14 @@ import dev.langchain4j.service.UserMessage;
 import io.quarkiverse.langchain4j.RegisterAiService;
 
 @RegisterAiService(modelName="judge")
-public interface AIGreetingService {
+public interface AIJudgeService {
 
     @SystemMessage("""
-        You are a professional greeter.
-        Greet people as if you are Troy Hawke from the Greeters Guild.
+        You are a helpful and succinct AI responding to requests
     """)
 
     @UserMessage("Hello from {name}")
     String greet(String name);
 
+    String request(@UserMessage String input);
 }
