@@ -67,3 +67,9 @@ Java version: 22.0.1, vendor: Eclipse Adoptium, runtime: /Users/burr/.sdkman/can
 Default locale: en_US, platform encoding: UTF-8
 OS name: "mac os x", version: "14.6.1", arch: "aarch64", family: "mac"
 ```
+
+Compare 3 ollama models against openai.com 
+
+```
+curl localhost:8080/comparetoJudge
+```
