@@ -5,6 +5,10 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.annotations.Property;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/")
@@ -18,12 +22,21 @@ public class RESTResource {
 
     @Inject AIJudgeService aijudge;
 
+    @ConfigProperty(name="quarkus.langchain4j.openai.judge.chat-model.model-name") String modelJudge;
+
     @Inject AICandidate1Service aicandidate1;
+
+    @ConfigProperty(name="quarkus.langchain4j.ollama.candidate1.chat-model.model-id") String modelNameCandidate1;
 
     @Inject AICandidate2Service aicandidate2;
 
+    @ConfigProperty(name="quarkus.langchain4j.ollama.candidate2.chat-model.model-id") String modelNameCandidate2;
+
     @Inject AICandidate3Service aicandidate3;
 
+    @ConfigProperty(name="quarkus.langchain4j.ollama.candidate3.chat-model.model-id") String modelNameCandidate3;
+
+    
     @GET
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
@@ -152,8 +165,8 @@ public class RESTResource {
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate2Response);
 
         System.out.println(response.output());
-        System.out.println("Candidate 1:" + candidate1Response + "\n");
-        System.out.println("Candidate 2:" + candidate2Response + "\n");
+        System.out.println(modelNameCandidate1 + ": " + candidate1Response + "\n");
+        System.out.println(modelNameCandidate2 + ":" + candidate2Response + "\n");
 
         System.out.println(response.score());
 
@@ -172,8 +185,8 @@ public class RESTResource {
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate3Response);
 
         System.out.println(response.output());
-        System.out.println("Candidate 1:" + candidate1Response + "\n");
-        System.out.println("Candidate 3:" + candidate3Response + "\n");
+        System.out.println(modelNameCandidate1 + ": " + candidate1Response + "\n");
+        System.out.println(modelNameCandidate3 + ": " + candidate3Response + "\n");
 
         System.out.println(response.score());
 
@@ -192,13 +205,33 @@ public class RESTResource {
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate2Response);
 
         System.out.println(response.output());
-        System.out.println("Candidate 1:" + candidate1Response + "\n");
-        System.out.println("Candidate 2:" + candidate2Response + "\n");
+        System.out.println(modelNameCandidate1 + ": " + candidate1Response + "\n");
+        System.out.println(modelNameCandidate2 + ": " + candidate2Response + "\n");
 
         System.out.println(response.score());
 
         return "Score: " + response.score();
     }
+
+    // Compare 1 to 2
+    // who is Burr Sutter
+    @GET
+    @Path("/compare1to3Burr")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String compare1to3Burr() {
+        String candidate1Response = aicandidate1.request("who is Burr Sutter in 25 words or less?");
+        String candidate3Response = aicandidate3.request("who is Burr Sutter in 25 words or less?");
+
+        TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate3Response);
+
+        System.out.println(response.output());
+        System.out.println("Candidate 1:" + candidate1Response + "\n");
+        System.out.println("Candidate 3:" + candidate3Response + "\n");
+
+        System.out.println(response.score());
+
+        return "Score: " + response.score();
+    }    
 
     // Compare candidates to judge
     // who is Burr Sutter
