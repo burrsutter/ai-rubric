@@ -225,8 +225,8 @@ public class RESTResource {
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate3Response);
 
         System.out.println(response.output());
-        System.out.println("Candidate 1:" + candidate1Response + "\n");
-        System.out.println("Candidate 3:" + candidate3Response + "\n");
+        System.out.println(modelNameCandidate1 + ": " + candidate1Response + "\n");
+        System.out.println(modelNameCandidate3 + ": " + candidate3Response + "\n");
 
         System.out.println(response.score());
 
@@ -241,16 +241,16 @@ public class RESTResource {
     public String comparetoJudge() {
         String judgeResponse = aijudge.request("who is Burr Sutter in 25 words or less?");
 
-        // Candidate 1 - mistral-nemo:12b
+        // Candidate 1
         String candidate1Response = aicandidate1.request("who is Burr Sutter in 25 words or less?");
         TestTwoStringsResponse test1response = aicosigntester.test(judgeResponse, candidate1Response);
         
 
-        // Candidate 2 - llama3.1:8b
+        // Candidate 2
         String candidate2Response = aicandidate2.request("who is Burr Sutter in 25 words or less?");
         TestTwoStringsResponse test2response = aicosigntester.test(judgeResponse, candidate2Response);
         
-        // Candidate 3 - qwen2.5:7b
+        // Candidate 3
         String candidate3Response = aicandidate3.request("who is Burr Sutter in 25 words or less?");
         TestTwoStringsResponse test3response = aicosigntester.test(judgeResponse, candidate3Response);
 
@@ -261,22 +261,22 @@ public class RESTResource {
 
         String judgedWinner = aijudge.request(judgePrompt);
 
-        System.out.println("\nCandiate 1 (mistral-nemo:12b) vs Judge: ");
+        System.out.println("\nCandiate 1 (" + modelNameCandidate1 + ") " + "vs Judge: ");
         System.out.println(test1response.output());
         System.out.println("\nJudge:" + judgeResponse + "\n");
         System.out.println("Candidate 1:" + candidate1Response + "\n");
         System.out.println(test1response.score());
 
-        System.out.println("\nCandiate 2 (llama3.1:8b) vs Judge: ");
+        System.out.println("\nCandiate 2 (" + modelNameCandidate2 + ") " + "vs Judge: ");
         System.out.println(test2response.output());
         System.out.println("\nJudge:" + judgeResponse + "\n");
-        System.out.println("Candidate 2:" + candidate1Response + "\n");
+        System.out.println("Candidate 2:" + candidate2Response + "\n");
         System.out.println(test2response.score());
 
-        System.out.println("\nCandiate 3 (qwen2.5:7b) vs Judge: ");
+        System.out.println("\nCandiate 3 (" + modelNameCandidate3 + ") " + "vs Judge: ");
         System.out.println(test3response.output());
         System.out.println("\nJudge:" + judgeResponse + "\n");
-        System.out.println("Candidate 3:" + candidate1Response + "\n");
+        System.out.println("Candidate 3:" + candidate3Response + "\n");
         System.out.println(test3response.score());
 
 
