@@ -246,7 +246,10 @@ public class RESTResource {
         System.out.println("Candidate 3:" + candidate1Response + "\n");
         System.out.println(test3response.score());
 
-        System.out.println(judgePrompt);
+
+        System.out.println("\n\n" + judgePrompt);
+        System.out.println(judgedWinner);
+
 
         return "Winner is " + judgedWinner;
         
