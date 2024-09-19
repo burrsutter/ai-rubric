@@ -41,3 +41,13 @@ Make sure to export the API key
 ```
 export QUARKUS_LANGCHAIN4J_OPENAI_JUDGE_API_KEY=sk-proj-1xMQkJtF
 ```
+
+Make sure to have `ollama serve` running
+
+Currently using:
+
+* gpt-4o-mini at openai.com
+* mistral-nemo:12b via Ollama
+* llama3.1:8b via Ollama
+* qwen2.5:7b via Ollama
+
