@@ -71,5 +71,15 @@ OS name: "mac os x", version: "14.6.1", arch: "aarch64", family: "mac"
 Compare 3 ollama models against openai.com 
 
 ```
+ollama serve
+```
+
+```
+ollama pull mistral-nemo:12b
+ollama pull llama3.1:8b
+ollama pull qwen2.5:7b
+```
+
+```
 curl localhost:8080/comparetoJudge
 ```
