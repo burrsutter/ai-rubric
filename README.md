@@ -78,6 +78,7 @@ ollama serve
 ollama pull mistral-nemo:12b
 ollama pull llama3.1:8b
 ollama pull qwen2.5:7b
+ollama pull granite-code:8b
 ```
 
 ```
