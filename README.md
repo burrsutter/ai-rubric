@@ -51,3 +51,19 @@ Currently using:
 * llama3.1:8b via Ollama
 * qwen2.5:7b via Ollama
 
+
+```
+java -version
+openjdk version "22.0.1" 2024-04-16
+OpenJDK Runtime Environment Temurin-22.0.1+8 (build 22.0.1+8)
+OpenJDK 64-Bit Server VM Temurin-22.0.1+8 (build 22.0.1+8, mixed mode)
+```
+
+```
+mvn -version
+Apache Maven 3.8.6 (84538c9988a25aec085021c365c560670ad80f63)
+Maven home: /Users/burr/.sdkman/candidates/maven/current
+Java version: 22.0.1, vendor: Eclipse Adoptium, runtime: /Users/burr/.sdkman/candidates/java/22.0.1-tem
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "14.6.1", arch: "aarch64", family: "mac"
+```
