@@ -7,7 +7,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.jboss.logging.annotations.Property;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,7 +40,11 @@ public class RESTResource {
 
     @ConfigProperty(name="quarkus.langchain4j.ollama.candidate4.chat-model.model-id") String modelNameCandidate4;
 
+    private static final String WHY_IS_THE_SKY_BLUE = "why is the sky blue in 25 words or less?";
+
+    private static final String WHO_IS_BURR_SUTTER = "who is Burr Sutter in 25 words or less?";
     
+
     @GET
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
@@ -126,7 +130,7 @@ public class RESTResource {
     @Path("/requestcandidate1")
     @Produces(MediaType.TEXT_PLAIN)
     public String requestcandidate1() {
-        return aicandidate1.request("why is the sky blue in 25 words or less?");
+        return aicandidate1.request(WHY_IS_THE_SKY_BLUE);
     }
 
     // Candidate2
@@ -140,7 +144,7 @@ public class RESTResource {
     @Path("/requestcandidate2")
     @Produces(MediaType.TEXT_PLAIN)
     public String requestcandidate2() {
-        return aicandidate2.request("why is the sky blue in 25 words or less?");
+        return aicandidate2.request(WHY_IS_THE_SKY_BLUE);
     }
 
     // Candidate3
@@ -154,7 +158,7 @@ public class RESTResource {
     @Path("/requestcandidate3")
     @Produces(MediaType.TEXT_PLAIN)
     public String requestcandidate3() {
-        return aicandidate3.request("why is the sky blue in 25 words or less?");
+        return aicandidate3.request(WHY_IS_THE_SKY_BLUE);
     }
 
     // Candidate4
@@ -162,13 +166,13 @@ public class RESTResource {
     @Path("/hellocandidate4")
     @Produces(MediaType.TEXT_PLAIN)
     public String hellocandidate4() {
-        return aicandidate4.greet("Burr");
+        return modelNameCandidate4 + ": " + aicandidate4.greet("Burr");
     }
     @GET
     @Path("/requestcandidate4")
     @Produces(MediaType.TEXT_PLAIN)
     public String requestcandidate4() {
-        return aicandidate4.request("why is the sky blue in 25 words or less?");
+        return modelNameCandidate4 + ": " + aicandidate4.request(WHY_IS_THE_SKY_BLUE);
     }
 
     // Compare 1 to 2
@@ -177,8 +181,8 @@ public class RESTResource {
     @Path("/compare1to2Sky")
     @Produces(MediaType.TEXT_PLAIN)
     public String compare1to2Sky() {
-        String candidate1Response = aicandidate1.request("why is the sky blue in 25 words or less?");
-        String candidate2Response = aicandidate2.request("why is the sky blue in 25 words or less?");
+        String candidate1Response = aicandidate1.request(WHY_IS_THE_SKY_BLUE);
+        String candidate2Response = aicandidate2.request(WHY_IS_THE_SKY_BLUE);
 
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate2Response);
 
@@ -197,8 +201,8 @@ public class RESTResource {
     @Path("/compare1to3Sky")
     @Produces(MediaType.TEXT_PLAIN)
     public String compare1to3Sky() {
-        String candidate1Response = aicandidate1.request("why is the sky blue in 25 words or less?");
-        String candidate3Response = aicandidate3.request("why is the sky blue in 25 words or less?");
+        String candidate1Response = aicandidate1.request(WHY_IS_THE_SKY_BLUE);
+        String candidate3Response = aicandidate3.request(WHY_IS_THE_SKY_BLUE);
 
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate3Response);
 
@@ -217,14 +221,14 @@ public class RESTResource {
     @Path("/compare1to4Sky")
     @Produces(MediaType.TEXT_PLAIN)
     public String compare1to4Sky() {
-        String candidate1Response = aicandidate1.request("why is the sky blue in 25 words or less?");
-        String candidate4Response = aicandidate2.request("why is the sky blue in 25 words or less?");
+        String candidate1Response = aicandidate1.request(WHY_IS_THE_SKY_BLUE);
+        String candidate4Response = aicandidate2.request(WHY_IS_THE_SKY_BLUE);
 
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate4Response);
 
         System.out.println(response.output());
         System.out.println(modelNameCandidate1 + ": " + candidate1Response + "\n");
-        System.out.println(modelNameCandidate4 + ":" + candidate4Response + "\n");
+        System.out.println(modelNameCandidate4 + ": " + candidate4Response + "\n");
 
         System.out.println(response.score());
 
@@ -237,8 +241,8 @@ public class RESTResource {
     @Path("/compare1to2Burr")
     @Produces(MediaType.TEXT_PLAIN)
     public String compare1to2Burr() {
-        String candidate1Response = aicandidate1.request("who is Burr Sutter in 25 words or less?");
-        String candidate2Response = aicandidate2.request("who is Burr Sutter in 25 words or less?");
+        String candidate1Response = aicandidate1.request(WHO_IS_BURR_SUTTER);
+        String candidate2Response = aicandidate2.request(WHO_IS_BURR_SUTTER);
 
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate2Response);
 
@@ -257,8 +261,8 @@ public class RESTResource {
     @Path("/compare1to3Burr")
     @Produces(MediaType.TEXT_PLAIN)
     public String compare1to3Burr() {
-        String candidate1Response = aicandidate1.request("who is Burr Sutter in 25 words or less?");
-        String candidate3Response = aicandidate3.request("who is Burr Sutter in 25 words or less?");
+        String candidate1Response = aicandidate1.request(WHO_IS_BURR_SUTTER);
+        String candidate3Response = aicandidate3.request(WHO_IS_BURR_SUTTER);
 
         TestTwoStringsResponse response = aicosigntester.test(candidate1Response, candidate3Response);
 
@@ -271,32 +275,32 @@ public class RESTResource {
         return "Score: " + response.score();
     }    
 
-    // Compare candidates to judge
+    // Compare Candidates to Judge
     // who is Burr Sutter
     @GET
-    @Path("/comparetoJudge")
+    @Path("/comparetoJudgeBurr")
     @Produces(MediaType.TEXT_PLAIN)
-    public String comparetoJudge() {
-        String judgeResponse = aijudge.request("who is Burr Sutter in 25 words or less?");
+    public String comparetoJudgeBurr() {
+        String judgeResponse = aijudge.request(WHO_IS_BURR_SUTTER);
 
         // Candidate 1
-        String candidate1Response = aicandidate1.request("who is Burr Sutter in 25 words or less?");
+        String candidate1Response = aicandidate1.request(WHO_IS_BURR_SUTTER);
         TestTwoStringsResponse test1response = aicosigntester.test(judgeResponse, candidate1Response);
         
         // Candidate 2
-        String candidate2Response = aicandidate2.request("who is Burr Sutter in 25 words or less?");
+        String candidate2Response = aicandidate2.request(WHO_IS_BURR_SUTTER);
         TestTwoStringsResponse test2response = aicosigntester.test(judgeResponse, candidate2Response);
         
         // Candidate 3
-        String candidate3Response = aicandidate3.request("who is Burr Sutter in 25 words or less?");
+        String candidate3Response = aicandidate3.request(WHO_IS_BURR_SUTTER);
         TestTwoStringsResponse test3response = aicosigntester.test(judgeResponse, candidate3Response);
 
         // Candidate 4
-        String candidate4Response = aicandidate4.request("who is Burr Sutter in 25 words or less?");
+        String candidate4Response = aicandidate4.request(WHO_IS_BURR_SUTTER);
         TestTwoStringsResponse test4response = aicosigntester.test(judgeResponse, candidate4Response);
 
 
-        String judgePrompt = "which of the following numbers is the highest score: " +
+        String judgePrompt = "Which of the following numbers is the highest score: " +
             test1response.score() + " " +
             test2response.score() + " " +
             test3response.score() + " " +
@@ -311,36 +315,108 @@ public class RESTResource {
         output.append("\nJudge: " + judgeResponse + "\n");
         // System.out.println("\nJudge:" + judgeResponse + "\n");
 
-        output.append("\nCandiate 1 (" + modelNameCandidate1 + ") " + "vs Judge: ");        
+        output.append("\nCandiate 1 (" + modelNameCandidate1 + ") ");        
         output.append("\n" + test1response.output());
         output.append("\nCandidate 1: " + candidate1Response + "\n");
         output.append(test1response.score());
         
-        output.append("\nCandiate 2 (" + modelNameCandidate2 + ") " + "vs Judge: ");
+        output.append("\nCandiate 2 (" + modelNameCandidate2 + ") ");
         output.append("\n" + test2response.output());
         output.append("\nCandidate 2: " + candidate2Response + "\n");
         output.append(test2response.score());
 
-        output.append("\nCandiate 3 (" + modelNameCandidate3 + ") " + "vs Judge: ");
+        output.append("\nCandiate 3 (" + modelNameCandidate3 + ") ");
         output.append("\n" + test3response.output());
         output.append("\nCandidate 3: " + candidate3Response + "\n");
         output.append(test3response.score());
 
-        output.append("\nCandiate 4 (" + modelNameCandidate4 + ") " + "vs Judge: ");
+        output.append("\nCandiate 4 (" + modelNameCandidate4 + ") ");
         output.append("\n" + test4response.output());
         output.append("\nCandidate 4: " + candidate4Response + "\n");
         output.append(test4response.score());
         
         System.out.println(output.toString());
 
-        // System.out.println("\n\n" + judgePrompt);
-        // System.out.println(judgedWinner);
+        System.out.println("\n\n" + judgePrompt);
+        // output.append("\n\n" + judgePrompt);
+
+        System.out.println(judgedWinner);
+        output.append("\n" + judgedWinner);
 
         return output.toString();
         
     }
 
-    
+    // Compare Candidates to Judge
+    // why is the sky blue?
+    @GET
+    @Path("/comparetoJudgeSky")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String comparetoJudgeSky() {
+        String judgeResponse = aijudge.request(WHY_IS_THE_SKY_BLUE);
 
+        // Candidate 1
+        String candidate1Response = aicandidate1.request(WHY_IS_THE_SKY_BLUE);
+        TestTwoStringsResponse test1response = aicosigntester.test(judgeResponse, candidate1Response);
+        
+        // Candidate 2
+        String candidate2Response = aicandidate2.request(WHY_IS_THE_SKY_BLUE);
+        TestTwoStringsResponse test2response = aicosigntester.test(judgeResponse, candidate2Response);
+        
+        // Candidate 3
+        String candidate3Response = aicandidate3.request(WHY_IS_THE_SKY_BLUE);
+        TestTwoStringsResponse test3response = aicosigntester.test(judgeResponse, candidate3Response);
+
+        // Candidate 4
+        String candidate4Response = aicandidate4.request(WHY_IS_THE_SKY_BLUE);
+        TestTwoStringsResponse test4response = aicosigntester.test(judgeResponse, candidate4Response);
+
+
+        String judgePrompt = "Which of the following numbers is the highest score: " +
+            test1response.score() + " " +
+            test2response.score() + " " +
+            test3response.score() + " " +
+            test4response.score();
+
+        String judgedWinner = aijudge.request(judgePrompt);
+
+        StringBuilder output = new StringBuilder();
+
+        System.out.println("\n******\n");
+
+        output.append("\nJudge: " + judgeResponse + "\n");
+        // System.out.println("\nJudge:" + judgeResponse + "\n");
+
+        output.append("\nCandiate 1 (" + modelNameCandidate1 + ") ");        
+        output.append("\n" + test1response.output());
+        output.append("\nCandidate 1: " + candidate1Response + "\n");
+        output.append(test1response.score());
+        
+        output.append("\nCandiate 2 (" + modelNameCandidate2 + ") ");
+        output.append("\n" + test2response.output());
+        output.append("\nCandidate 2: " + candidate2Response + "\n");
+        output.append(test2response.score());
+
+        output.append("\nCandiate 3 (" + modelNameCandidate3 + ") ");
+        output.append("\n" + test3response.output());
+        output.append("\nCandidate 3: " + candidate3Response + "\n");
+        output.append(test3response.score());
+
+        output.append("\nCandiate 4 (" + modelNameCandidate4 + ") ");
+        output.append("\n" + test4response.output());
+        output.append("\nCandidate 4: " + candidate4Response + "\n");
+        output.append(test4response.score());
+        
+        System.out.println(output.toString());
+
+        System.out.println("\n\n" + judgePrompt);
+        // output.append("\n\n" + judgePrompt);
+
+        System.out.println(judgedWinner);
+        output.append("\n" + judgedWinner);
+
+        return output.toString();
+        
+    }
 
 }

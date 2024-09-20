@@ -68,7 +68,9 @@ Default locale: en_US, platform encoding: UTF-8
 OS name: "mac os x", version: "14.6.1", arch: "aarch64", family: "mac"
 ```
 
-Compare 3 ollama models against openai.com 
+### Testing
+
+Compare 4 ollama models against openai.com 
 
 ```
 ollama serve
@@ -79,8 +81,25 @@ ollama pull mistral-nemo:12b
 ollama pull llama3.1:8b
 ollama pull qwen2.5:7b
 ollama pull granite-code:8b
+or
+ollama pull granite-code:20b (response timeouts)
+```
+
+4 LLMs vs gpt4o-mini
+```
+curl localhost:8080/comparetoJudgeBurr
+```
+
+4 LLMs vs gpt4o-mini
+```
+curl localhost:8080/comparetoJudgeSky
 ```
 
 ```
-curl localhost:8080/comparetoJudge
+curl -X POST -H 'Content-Type: application/json' -d @request.json http://localhost:8080/allcandidates
 ```
+
+```
+curl -X POST -H 'Content-Type: application/json' -d '{"request": "you are amazing"}' http://localhost:8080/allcandidates
+```
+

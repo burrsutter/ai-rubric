@@ -15,4 +15,5 @@ public interface AICandidate1Service {
     String greet(String name);
 
     String request(@UserMessage String input);
+
 }
