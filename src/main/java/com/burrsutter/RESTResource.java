@@ -21,28 +21,34 @@ public class RESTResource {
     @Inject AITestTwoStringsService aicosigntester;
 
     @Inject AIJudgeService aijudge;
-
+    @Inject AIJudgeServiceJSON aijsonjudge;
     @ConfigProperty(name="quarkus.langchain4j.openai.judge.chat-model.model-name") String modelJudge;
 
     @Inject AICandidate1Service aicandidate1;
-
+    @Inject AICandidate1ServiceJSON aijson1;
     @ConfigProperty(name="quarkus.langchain4j.ollama.candidate1.chat-model.model-id") String modelNameCandidate1;
 
     @Inject AICandidate2Service aicandidate2;
-
+    @Inject AICandidate1ServiceJSON aijson2;
     @ConfigProperty(name="quarkus.langchain4j.ollama.candidate2.chat-model.model-id") String modelNameCandidate2;
 
     @Inject AICandidate3Service aicandidate3;
-
+    @Inject AICandidate1ServiceJSON aijson3;
     @ConfigProperty(name="quarkus.langchain4j.ollama.candidate3.chat-model.model-id") String modelNameCandidate3;
 
     @Inject AICandidate4Service aicandidate4;
-
+    @Inject AICandidate1ServiceJSON aijson4;
     @ConfigProperty(name="quarkus.langchain4j.ollama.candidate4.chat-model.model-id") String modelNameCandidate4;
+
+    
+    
+
 
     private static final String WHY_IS_THE_SKY_BLUE = "why is the sky blue in 25 words or less?";
 
     private static final String WHO_IS_BURR_SUTTER = "who is Burr Sutter in 25 words or less?";
+
+    private static final String HOW_MANY_R_STRAWBERRY = "How many letter R's are there in the word 'strawberry'?";
     
 
     @GET
@@ -173,6 +179,46 @@ public class RESTResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String requestcandidate4() {
         return modelNameCandidate4 + ": " + aicandidate4.request(WHY_IS_THE_SKY_BLUE);
+    }
+
+
+    // Candidate 1: how many Rs
+    @GET
+    @Path("/howmanyrs")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String howManyRs() {
+        StringBuilder output = new StringBuilder();
+        TestResponseCount aiResponse1 = aijson1.request(HOW_MANY_R_STRAWBERRY);
+        TestResponseCount aiResponse2 = aijson2.request(HOW_MANY_R_STRAWBERRY);
+        TestResponseCount aiResponse3 = aijson3.request(HOW_MANY_R_STRAWBERRY);
+        TestResponseCount aiResponse4 = aijson4.request(HOW_MANY_R_STRAWBERRY);
+        TestResponseCount aiResponseJudge = aijsonjudge.request(HOW_MANY_R_STRAWBERRY);
+        
+        output.append(modelNameCandidate1 + ": " + aiResponse1.request() 
+            + " " + aiResponse1.response() + " " + aiResponse1.count());
+
+        output.append("\n");
+
+        output.append(modelNameCandidate2 + ": " + aiResponse2.request() 
+            + " " + aiResponse2.response() + " " + aiResponse2.count());
+
+        output.append("\n");
+        
+        output.append(modelNameCandidate3 + ": " + aiResponse3.request() 
+            + " " + aiResponse3.response() + " " + aiResponse3.count());
+
+        output.append("\n");
+        
+        output.append(modelNameCandidate4 + ": " + aiResponse4.request() 
+            + " " + aiResponse4.response() + " " + aiResponse4.count());
+
+        output.append("\n");
+        
+        output.append(modelJudge + ": " + aiResponseJudge.request() 
+            + " " + aiResponseJudge.response() + " " + aiResponseJudge.count());
+    
+
+        return output.toString();
     }
 
     // Compare 1 to 2

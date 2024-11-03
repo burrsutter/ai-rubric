@@ -7,9 +7,9 @@ import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 import io.quarkiverse.langchain4j.RegisterAiService;
 
-@RegisterAiService(modelName="candidate1", 
+@RegisterAiService(modelName="candidate4", 
     chatMemoryProviderSupplier = RegisterAiService.NoChatMemoryProviderSupplier.class)
-public interface AICandidate1ServiceJSON {
+public interface AICandidate4ServiceJSON {
 
     @SystemMessage("""
         You are a helpful and succinct AI responding to requests        

@@ -96,10 +96,23 @@ curl localhost:8080/comparetoJudgeSky
 ```
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d @request.json http://localhost:8080/allcandidates
+curl -X POST -H 'Content-Type: application/json' -d '{"request": "why is the sky blue"}' http://localhost:8080/allcandidates
 ```
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"request": "you are amazing"}' http://localhost:8080/allcandidates
+curl -X POST -H 'Content-Type: application/json' -d @skyblue.json http://localhost:8080/allcandidates
 ```
 
+```
+curl -X POST -H 'Content-Type: application/json' -d @./prompts/marble.json http://localhost:8080/allcandidates
+```
+
+**gpt-4omini**
+
+The marble is on the table, not in the glass, because it fell out when the glass was turned upside down.
+
+**mistral-nemo:12b**
+
+The marble would be inside the microwave.
+
+updated
