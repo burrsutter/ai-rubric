@@ -10,6 +10,10 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+/*
+ * Not working yet
+ */
+
 @Path("/")
 public class POSTResource {
     @Inject AICandidate1ServiceJSON ai1;
@@ -24,15 +28,15 @@ public class POSTResource {
     @Inject AICandidate4Service ai4;
     @ConfigProperty(name="quarkus.langchain4j.ollama.candidate4.chat-model.model-id") String modelNameCandidate4;
 
-    @POST
-    @Path("/allcandidates")
-    @Produces(MediaType.APPLICATION_JSON) 
-    @Consumes(MediaType.APPLICATION_JSON) 
-    public TestResponse makeRequest(String request) {
-        System.out.println(request);
+    // @POST
+    // @Path("/allcandidates")
+    // @Produces(MediaType.APPLICATION_JSON) 
+    // @Consumes(MediaType.APPLICATION_JSON) 
+    // public TestResponse makeRequest(String request) {
+    //     System.out.println(request);
         
-        return ai1.request(request);
-    }
+    //     return ai1.request(request);
+    // }
 
 
 }

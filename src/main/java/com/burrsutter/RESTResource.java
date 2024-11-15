@@ -361,22 +361,22 @@ public class RESTResource {
         output.append("\nJudge: " + judgeResponse + "\n");
         // System.out.println("\nJudge:" + judgeResponse + "\n");
 
-        output.append("\nCandiate 1 (" + modelNameCandidate1 + ") ");        
+        output.append("\nCandidate 1 (" + modelNameCandidate1 + ") ");        
         output.append("\n" + test1response.output());
         output.append("\nCandidate 1: " + candidate1Response + "\n");
         output.append(test1response.score());
         
-        output.append("\nCandiate 2 (" + modelNameCandidate2 + ") ");
+        output.append("\nCandidate 2 (" + modelNameCandidate2 + ") ");
         output.append("\n" + test2response.output());
         output.append("\nCandidate 2: " + candidate2Response + "\n");
         output.append(test2response.score());
 
-        output.append("\nCandiate 3 (" + modelNameCandidate3 + ") ");
+        output.append("\nCandidate 3 (" + modelNameCandidate3 + ") ");
         output.append("\n" + test3response.output());
         output.append("\nCandidate 3: " + candidate3Response + "\n");
         output.append(test3response.score());
 
-        output.append("\nCandiate 4 (" + modelNameCandidate4 + ") ");
+        output.append("\nCandidate 4 (" + modelNameCandidate4 + ") ");
         output.append("\n" + test4response.output());
         output.append("\nCandidate 4: " + candidate4Response + "\n");
         output.append(test4response.score());
@@ -433,22 +433,22 @@ public class RESTResource {
         output.append("\nJudge: " + judgeResponse + "\n");
         // System.out.println("\nJudge:" + judgeResponse + "\n");
 
-        output.append("\nCandiate 1 (" + modelNameCandidate1 + ") ");        
+        output.append("\nCandidate 1 (" + modelNameCandidate1 + ") ");        
         output.append("\n" + test1response.output());
         output.append("\nCandidate 1: " + candidate1Response + "\n");
         output.append(test1response.score());
         
-        output.append("\nCandiate 2 (" + modelNameCandidate2 + ") ");
+        output.append("\nCandidate 2 (" + modelNameCandidate2 + ") ");
         output.append("\n" + test2response.output());
         output.append("\nCandidate 2: " + candidate2Response + "\n");
         output.append(test2response.score());
 
-        output.append("\nCandiate 3 (" + modelNameCandidate3 + ") ");
+        output.append("\nCandidate 3 (" + modelNameCandidate3 + ") ");
         output.append("\n" + test3response.output());
         output.append("\nCandidate 3: " + candidate3Response + "\n");
         output.append(test3response.score());
 
-        output.append("\nCandiate 4 (" + modelNameCandidate4 + ") ");
+        output.append("\nCandidate 4 (" + modelNameCandidate4 + ") ");
         output.append("\n" + test4response.output());
         output.append("\nCandidate 4: " + candidate4Response + "\n");
         output.append(test4response.score());
